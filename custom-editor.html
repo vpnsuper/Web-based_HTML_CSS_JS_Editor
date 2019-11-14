@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <title>Custom-editor test</title>
+    <meta name="description" content="">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+
+      /* table {
+        table-layout: fixed;
+      } */
+
+      #editor-area {
+        margin: 10px auto;
+        padding: 10px auto;
+        height: 300px;
+        overflow: scroll;
+      }
+
+      .editable-line:focus {
+        outline: none;
+        box-shadow: none;
+      }
+
+      p {
+        outline: none;
+        box-shadow: none;
+      }
+
+      .line-num {
+        font-weight: bold;
+      }
+
+      p.edit-line {
+        display: inline;
+        margin-left: 10px;
+
+        /* Consolas font */
+        font-family: Consolas, monaco, monospace; 
+        font-size: 14px; 
+        font-style: normal; 
+        font-variant: normal; 
+        font-weight: 400; 
+        line-height: 20px;
+      }
+
+      span.line-num {
+        display: inline-block;
+        width: 40px;
+        text-align: right;
+
+        /* Courier New Font */
+        font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace; 
+        font-size: 14px; 
+        font-style: normal; 
+        font-variant: normal; 
+        font-weight: bold; 
+        line-height: 20px;
+
+        border-bottom: 1px solid gray;
+      }
+
+      br {
+        display: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- <div class="container">
+      <span id="line-num">Line #: </span>
+      <span id="line" contenteditable>Sup nigga</span>
+    </div> -->
+
+    
+    <!-- <div class="container">
+        <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Code</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="50" rowspan="3" class="editable-line"><span class="line-num" id="line-1">1</span><p contenteditable>asdg</p></td>
+              </tr>
+              <tr>
+                <td colspan="50" rowspan="3" class="editable-line"><span class="line-num" id="line-2">2</span><p contenteditable>asdg</p></td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+              </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+    <div class="container border" id="editor-area">
+      <!-- Will be generated programmatically. -->
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        'use strict';
+
+        console.log('content loaded');
+
+        let buffer = [];
+
+        let numOfLines = 0, currentLine = 0;
+
+        function keyDownOnLine(event) {
+
+          // Pressed Enter key.
+          if (event.key === "Enter") {
+
+            if (numOfLines === currentLine) {
+              setupLines(currentLine + 1);
+            }
+
+            // Take care of multiple line generations; potentially a problem with copy and paste.
+
+            var nextEditLine = document.getElementById("edit-line-" + (currentLine + 1).toString());
+            setTimeout(function() {
+              // let line = document.getElementById("edit-line-1");
+              // let lineBreak = document.querySelector('#edit-line-1 br');
+              // line.removeChild(lineBreak);
+              nextEditLine.focus();
+            }, 0);
+            currentLine++;
+          }
+
+          // Pressed ArrowRight or ArrowLeft
+          
+          // Pressed ArrowUp or ArrowDown (combine ArrowRight/ArrowLeft with focusing)
+
+        }
+
+        // Increment numOfLines before passing lineNum
+        function generateLine(lineNum) {
+          let lineNumStr = lineNum.toString();
+
+          let editorArea = document.getElementById("editor-area");
+
+          var newLineDiv = document.createElement("div");
+          newLineDiv.classList.add("entire-line");
+
+          var spanInLineDiv = document.createElement("span");
+          spanInLineDiv.classList.add("line-num");
+          spanInLineDiv.setAttribute("id", "line-" + lineNumStr);
+          spanInLineDiv.textContent = lineNumStr;
+
+          var pInLineDiv = document.createElement("p");
+          pInLineDiv.classList.add("edit-line");
+          pInLineDiv.setAttribute("id", "edit-line-" + lineNumStr);
+          pInLineDiv.lineNum = lineNum;
+          pInLineDiv.textContent = lineNumStr + " line!!!";
+          pInLineDiv.contentEditable = "true";
+
+          // Add events
+          pInLineDiv.addEventListener("keydown", keyDownOnLine);
+          pInLineDiv.addEventListener("click", updateCurrentLine);
+
+          function updateCurrentLine() {
+            if (pInLineDiv === document.activeElement)
+              // Previous sibling is the number of line span element. 
+              // currentLine = parseInt(editableLine.previousSibling.textContent);]
+              currentLine = pInLineDiv.lineNum;
+          }
+
+          // Append.
+          newLineDiv.appendChild(spanInLineDiv);
+          newLineDiv.appendChild(pInLineDiv);
+
+          editorArea.appendChild(newLineDiv);
+        }
+
+        function setupLines(lineAmount) {
+          for (numOfLines; numOfLines < lineAmount; numOfLines++) {
+            generateLine(numOfLines + 1);
+          }
+        }
+
+        setupLines(100);
+        
+        // function keyDownOnLine(event) {
+        //   const key = event.key;
+        //   buffer.push(key);
+
+        //   if (key === "<") {
+        //     let line = document.getElementById("line");
+        //     line.innerHTML += '<span id="something"></span>';
+        //   }
+
+        //   if (key === ">") {
+
+        //     var i, elementStr = "";
+        //     var closingBracketIndex = key.indexOf(">");
+        //     // Get the index of beginning bracket "<"
+        //     for (i = closingBracketIndex - 1; key[i] != "<"; i--) ;
+        //     for (i = i + 1; i < closingBracketIndex; i++) {
+        //       elementStr += key[i];
+        //     }
+
+        //     let tagElement = document.getElementById("something");
+        //     tagElement.style.color = "#DEB887";
+        //     tagElement.textContent = "<" + elementStr + "></" + elementStr + ">";
+
+        //   }
+        // }
+
+      });
+    </script>
+  </body>
+</html>

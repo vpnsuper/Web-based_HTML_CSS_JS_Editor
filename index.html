@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>James's Text Editor</title>
+    <meta name="description" content="James's very own text editor on the web.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FontAwesome -->
+    <script src="https://use.fontawesome.com/678d8702ec.js"></script>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+      <h1>My Text Editor</h1>
+      <p>This is some text.</p>
+      <div class="container" id="alert-area">
+        <!-- Will be added from Javascript -->
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col border-right">
+
+          <button type="button" class="btn btn-primary" id="run-btn">Run <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+          
+          <!-- HTML Text Edit Area -->
+          <div class="container">
+            <label for="html-editor-area">HTML: </label>
+            <button type="button" id="html-clear-btn" class="btn btn-secondary clear-btn">Clear</button>
+          </div>
+          <div class="container border rounded" id="html-editor-area">
+            <!-- Will be generated programmatically. -->
+          </div>
+
+          <!-- CSS Text Edit Area -->
+          <div class="container">
+            <label for="css-edit-Area">CSS: </label>
+            <button type="button" id="css-clear-btn" class="btn btn-secondary clear-btn">Clear</button>
+          </div>
+
+          <div class="container border rounded" id="css-editor-area">
+            <!-- Will be generated programmatically. -->
+          </div>
+
+          <!-- Javascript Text Edit Area -->
+          <div class="container">
+            <label for="js-edit-area">Javascript: </label>
+            <button type="button" id="js-clear-btn" class="btn btn-secondary clear-btn">Clear</button>   
+          </div>
+
+          <div class="container border rounded" id="js-editor-area">
+            <!-- Will be generated programmatically. -->
+          </div>
+
+          <button type="button" class="btn btn-secondary btn-sm btn-block" id="local-storage-btn">Store Locally</button>
+          
+        </div>
+        <div class="col">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="iframe-id" class="embed-responsive-item" src=""></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="script.js" async defer></script>
+  </body>
+</html>

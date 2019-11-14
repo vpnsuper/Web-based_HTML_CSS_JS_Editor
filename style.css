@@ -1,0 +1,75 @@
+/* FIX-IT: When mouse was pressed down and stayed in the button, 
+there still was a box shadow. */
+.btn:focus, .btn:active {
+  box-shadow: none;
+}
+
+#run-btn {
+  float: right;
+  margin: 5px 0;
+}
+
+#css-reset-btn, #js-reset-btn {
+  margin: 10px 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* custom-editor style */
+#html-editor-area, #css-editor-area, #js-editor-area {
+  margin: 10px auto;
+  padding: 10px auto;
+  height: 300px;
+  overflow: scroll;
+}
+
+.editable-line:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+p {
+  outline: none;
+  box-shadow: none;
+}
+
+p.edit-line {
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 0;
+  width: 90%;
+
+  /* Consolas font */
+  font-family: Consolas, monaco, monospace; 
+  font-size: 14px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 20px;
+}
+
+span.line-num {
+  display: inline-block;
+  width: 40px;
+  text-align: right;
+
+  /* Courier New Font */
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace; 
+  font-size: 14px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: bold; 
+  line-height: 20px;
+
+  border-bottom: 1px solid gray;
+}
+
+/* br {
+  display: none;
+} */
+
+#local-storage-btn {
+  margin-bottom: 10px;
+}
